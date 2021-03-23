@@ -1,23 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useStateValue } from "./StateProvider";
 
 function App() {
+  const [{ items, product }, dispatch] = useStateValue();
+
+  console.log({ items });
+
+  const addItem = () => {
+    dispatch({
+      type: "ADD_ITEM",
+      items: items + 1,
+    });
+  };
+
+  const addProduct = () => {
+    const prod = { name: "Toy car", price: 25 };
+
+    console.log({ product });
+    
+    
+    dispatch({
+      type: "ADD_PRODUCT",
+      product: prod,
+    });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Quantity: {items}</h1>
+      <h2>Total Product: {product?.length}</h2>
+      <button onClick={addItem}>ADD</button>
+      <button onClick={addProduct}>ADD PRODUCT</button>
     </div>
   );
 }
